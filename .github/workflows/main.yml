@@ -1,4 +1,4 @@
-name: Pipeline-to-DockerHub #This is the name of our workflow displayer in "Actions" tab.
+name: Pipeline-to-DockerHub #This is the name of our workflow displayed in "Actions" tab.
 
 on: #This line describes the condition on which our workflow will be executed.
   push: #So, on "push" (if I or any other developer, working with this project, pushes an update to our branch, then this code will execute).
@@ -25,7 +25,7 @@ jobs: #This line begins the list of our jobs that will be run by Git.
       run: python3 -m unittest tests.py #Command to run unittest on my app.
        
     - name: Login to docker hub #Another name of the tab.
-      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9 #Uses login-action script with long verstion number.
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9 #Uses login-action script with long version number.
       with: #The requirement that should be satisfied.
           username: ${{ secrets.DOCKER_USERNAME }} #This variable is used to enter my docker hub username in an encrypted way.
           password: ${{ secrets.DOCKER_PASSWORD }} #This variable is used to enter my docker hub password in an encrypted way.
@@ -34,11 +34,10 @@ jobs: #This line begins the list of our jobs that will be run by Git.
       run : docker build -t techprog-app-${{ github.sha }}:ver-${{ github.sha }} . #Regular shell command that uses my Dockerfile to build
       #an image with the name techprog-app-${{ github.sha }}:ver-${{ github.sha }}, where ${{ github.sha }} is SHA hashsum of the last commit.
       #Just makes it easy to differentiate between various versions.
-      
         
     - name: Push my docker image to docker hub #Name of the tab that will be used to push created image to the docker hub.
       #The run parameter with pipe symbol is used to execute more then one command under one "run" statement. The first command
-      #sets the tag on our created imaged. The second one pushes that image with specified tag to the docker hub.
+      #sets the tag on our created image. The second one pushes that image with specified tag to the docker hub.
       run : | 
               docker tag techprog-app-${{ github.sha }}:ver-${{ github.sha }} jtwist/techprog-app:ver-${{ github.sha }}
               docker push jtwist/techprog-app:ver-${{ github.sha }}
