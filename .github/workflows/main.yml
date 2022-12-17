@@ -39,5 +39,5 @@ jobs: #This line begins the list of our jobs that will be run by Git.
       #The run parameter with pipe symbol is used to execute more then one command under one "run" statement. The first command
       #sets the tag on our created image. The second one pushes that image with specified tag to the docker hub.
       run : | 
-              docker tag techprog-app-${{ github.sha }}:ver-${{ github.sha }} jtwist/techprog-app:ver-${{ github.sha }}
-              docker push jtwist/techprog-app:ver-${{ github.sha }}
+              docker tag techprog-app-${{ github.sha }}:ver-${{ github.sha }} jtwist/techprog-app:latest
+              docker push jtwist/techprog-app:latest
