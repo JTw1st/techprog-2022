@@ -31,8 +31,8 @@ jobs: #This line begins the list of our jobs that will be run by Git.
           password: ${{ secrets.DOCKER_PASSWORD }} #This variable is used to enter my docker hub password in an encrypted way.
        
     - name: Create docker image from Dockerfile #Another name of the tab.
-      run : docker build -t app-${{ github.sha }}:ver-${{ github.sha }} . #Regular shell command that uses my Dockerfile to build
-      #an image with the name app-${{ github.sha }}:ver-${{ github.sha }}, where ${{ github.sha }} is SHA hashsum of the last commit.
+      run : docker build -t techprog-app-${{ github.sha }}:ver-${{ github.sha }} . #Regular shell command that uses my Dockerfile to build
+      #an image with the name techprog-app-${{ github.sha }}:ver-${{ github.sha }}, where ${{ github.sha }} is SHA hashsum of the last commit.
       #Just makes it easy to differentiate between various versions.
       
         
@@ -40,5 +40,5 @@ jobs: #This line begins the list of our jobs that will be run by Git.
       #The run parameter with pipe symbol is used to execute more then one command under one "run" statement. The first command
       #sets the tag on our created imaged. The second one pushes that image with specified tag to the docker hub.
       run : | 
-              docker tag app-${{ github.sha }}:ver-${{ github.sha }} jtwist/app:ver-${{ github.sha }}
-              docker push jtwist/app:ver-${{ github.sha }}
+              docker tag techprog-app-${{ github.sha }}:ver-${{ github.sha }} jtwist/techprog-app:ver-${{ github.sha }}
+              docker push jtwist/techprog-app:ver-${{ github.sha }}
